@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080'
+const API_BASE = 'https://complianceportal-production.up.railway.app'
 
 function authHeaders() {
   const token = localStorage.getItem('token')
