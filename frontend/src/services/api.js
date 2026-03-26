@@ -1,4 +1,4 @@
-const API_BASE = 'https://complianceportal-production.up.railway.app'
+const API_BASE = 'https://complianceportal-production.up.railway.app/'
 
 function authHeaders() {
   const token = localStorage.getItem('token')
@@ -24,45 +24,45 @@ async function parseResponse(response) {
 
 export const api = {
   login: (payload) =>
-    fetch(`${API_BASE}/api/auth/login`, {
+    fetch(`${API_BASE}api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).then(parseResponse),
 
   logout: () =>
-    fetch(`${API_BASE}/api/auth/logout`, {
+    fetch(`${API_BASE}api/auth/logout`, {
       method: 'POST',
       headers: authHeaders(),
     }).then(parseResponse),
 
   createUser: (payload) =>
-    fetch(`${API_BASE}/api/admin/users`, {
+    fetch(`${API_BASE}api/admin/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(payload),
     }).then(parseResponse),
 
   getUsersByRole: (role) =>
-    fetch(`${API_BASE}/api/admin/users/${role}`, {
+    fetch(`${API_BASE}api/admin/users/${role}`, {
       headers: authHeaders(),
     }).then(parseResponse),
 
   assignMentor: (payload) =>
-    fetch(`${API_BASE}/api/admin/assign-mentor`, {
+    fetch(`${API_BASE}api/admin/assign-mentor`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(payload),
     }).then(parseResponse),
 
   getAllDocuments: () =>
-    fetch(`${API_BASE}/api/admin/documents`, { headers: authHeaders() }).then(parseResponse),
+    fetch(`${API_BASE}api/admin/documents`, { headers: authHeaders() }).then(parseResponse),
 
   uploadDocument: (documentName, file) => {
     const formData = new FormData()
     formData.append('documentName', documentName)
     formData.append('file', file)
-    return fetch(`${API_BASE}/api/student/upload`, {
+    return fetch(`${API_BASE}api/student/upload`, {
       method: 'POST',
       headers: authHeaders(),
       body: formData,
@@ -70,20 +70,20 @@ export const api = {
   },
 
   getStudentDocuments: () =>
-    fetch(`${API_BASE}/api/student/documents`, { headers: authHeaders() }).then(parseResponse),
+    fetch(`${API_BASE}api/student/documents`, { headers: authHeaders() }).then(parseResponse),
 
   getAssignedStudents: () =>
-    fetch(`${API_BASE}/api/mentor/students`, { headers: authHeaders() }).then(parseResponse),
+    fetch(`${API_BASE}api/mentor/students`, { headers: authHeaders() }).then(parseResponse),
 
   getAssignedDocuments: () =>
-    fetch(`${API_BASE}/api/mentor/documents`, { headers: authHeaders() }).then(parseResponse),
+    fetch(`${API_BASE}api/mentor/documents`, { headers: authHeaders() }).then(parseResponse),
 
   reviewDocument: (documentId, payload) =>
-    fetch(`${API_BASE}/api/mentor/review/${documentId}`, {
+    fetch(`${API_BASE}api/mentor/review/${documentId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(payload),
     }).then(parseResponse),
 
-  fileUrl: (documentId) => `${API_BASE}/api/files/${documentId}`,
+  fileUrl: (documentId) => `${API_BASE}api/files/${documentId}`,
 }
